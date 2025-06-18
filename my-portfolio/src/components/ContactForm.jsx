@@ -1,0 +1,169 @@
+// src/components/Contact.jsx
+import { motion } from 'framer-motion';
+import { useForm } from 'react-hook-form';
+import { FaPaperPlane, FaMapMarkerAlt, FaPhone, FaEnvelope } from 'react-icons/fa';
+import { useTheme } from '../context/ThemeContext';
+import emailjs from '@emailjs/browser';
+
+const Contact = () => {
+  const { theme } = useTheme();
+  const { register, handleSubmit, formState: { errors }, reset } = useForm();
+
+  const serviceID = 'service_zal0f6g';
+  const adminTemplateID = 'template_5h1kws7'; 
+  const userTemplateID = 'template_auecp52';
+  const publicKey = 'mwl4EKLttV9hmwgab';
+
+  const onSubmit = (data) => {
+    emailjs.send(serviceID, adminTemplateID, data, publicKey)
+      .then(() => {
+        emailjs.send(serviceID, userTemplateID, data, publicKey)
+          .then(() => {
+            alert('Message envoyé avec succès ! Vous recevrez une confirmation par email.');
+            reset();
+          })
+          .catch((err) => {
+            console.error('Erreur auto-réponse :', err);
+            alert('Le message a été envoyé, mais la confirmation par email a échoué.');
+            reset();
+          });
+      })
+      .catch((err) => {
+        console.error('Erreur envoi admin :', err);
+        alert("Une erreur s'est produite lors de l'envoi du message.");
+      });
+  };
+
+  return (
+    <section id="contact" className={`contact-section ${theme}`}>
+      <div className="animated-bg" />
+      
+      <div className="container">
+        <motion.h2
+          className="tous-title"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+        >
+          <span className="text-gradient">Contactez-moi</span>
+        </motion.h2>
+        
+        <div className="contact-grid">
+          <motion.div
+            className="contact-info"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <h3>Informations de contact</h3>
+            
+            <div className="info-item">
+              <div className="info-icon">
+                <FaMapMarkerAlt />
+              </div>
+              <div>
+                <h4>Localisation</h4>
+                <p>Sidi Hassine, Tunis</p>
+              </div>
+            </div>
+            
+            <div className="info-item">
+              <div className="info-icon">
+                <FaPhone />
+              </div>
+              <div>
+                <h4>Téléphone</h4>
+                <p>+216 24840945</p>
+              </div>
+            </div>
+            
+            <div className="info-item">
+              <div className="info-icon">
+                <FaEnvelope />
+              </div>
+              <div>
+                <h4>Email</h4>
+                <p>haithemboujnah1@gmail.com</p>
+              </div>
+            </div>
+          </motion.div>
+          
+          <motion.div
+            className="contact-form"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className="form-group">
+                <input
+                  type="text"
+                  placeholder="Votre nom"
+                  {...register("name", { required: "Ce champ est requis" })}
+                  className={errors.name ? 'error' : ''}
+                />
+                {errors.name && <span className="error-message">{errors.name.message}</span>}
+              </div>
+              
+              <div className="form-group">
+                <input
+                  type="email"
+                  placeholder="Votre email"
+                  {...register("email", { 
+                    required: "Ce champ est requis",
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      message: "Email invalide"
+                    }
+                  })}
+                  className={errors.email ? 'error' : ''}
+                />
+                {errors.email && <span className="error-message">{errors.email.message}</span>}
+              </div>
+              
+              <div className="form-group">
+                <input
+                  type="text"
+                  placeholder="Sujet"
+                  {...register("subject", { required: "Ce champ est requis" })}
+                  className={errors.subject ? 'error' : ''}
+                />
+                {errors.subject && <span className="error-message">{errors.subject.message}</span>}
+              </div>
+              
+              <div className="form-group">
+                <textarea
+                  placeholder="Votre message"
+                  rows="5"
+                  {...register("message", { 
+                    required: "Ce champ est requis",
+                    minLength: {
+                      value: 10,
+                      message: "Le message doit contenir au moins 10 caractères"
+                    }
+                  })}
+                  className={errors.message ? 'error' : ''}
+                />
+                {errors.message && <span className="error-message">{errors.message.message}</span>}
+              </div>
+              
+              <motion.button
+                type="submit"
+                className="submit-btn"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Envoyer <FaPaperPlane />
+              </motion.button>
+            </form>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Contact;
