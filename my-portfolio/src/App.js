@@ -1,6 +1,5 @@
 // src/App.js
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Header from './components/Header';
 import About from './components/About';
@@ -15,10 +14,27 @@ import Footer from './components/Footer';
 import './assets/styles/global.css';
 import { ThemeProvider } from './context/ThemeContext';
 import AnimatedBackground from './components/AnimatedBackground';
+import Loading from './components/Loading';
+import { useState, useEffect } from 'react';
+
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+    
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <ThemeProvider>
+      {isLoading ? (
+        <Loading />
+      ) : (
+      <>
       <AnimatedBackground />
       <Router>
         <div className="app">
@@ -41,6 +57,8 @@ function App() {
           <Footer />
         </div>
       </Router>
+      </>
+      )}
     </ThemeProvider>
   );
 }
