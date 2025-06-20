@@ -1,10 +1,93 @@
 // src/components/Projects.jsx
 import { motion } from 'framer-motion';
 import { FaGithub } from 'react-icons/fa';
-import { SiSymfony, SiSpring, SiFlutter, SiPython, SiAngular } from 'react-icons/si';
+import { SiSymfony, SiSpring, SiFlutter, SiPython, SiAngular, SiFlask } from 'react-icons/si';
 import { FaAndroid, FaPhp, FaJava } from 'react-icons/fa';
 
 const projects = [
+  {
+    title: "SmartPot",
+    description: "Système expert intelligent pour l’arrosage des plantes.",
+    features: [
+      "Moteur d’inférence avec chaînage avant, arrière et mixte.",
+      "25 règles expertes pour diagnostiquer les besoins hydriques.",
+      "Alertes automatiques et recommandations."
+    ],
+    technologies: ["Python"],
+    icon: <SiPython />,
+    color: "#3776AB",
+    github: "#"
+  },
+  {
+    title: "LePendu",
+    description: "Jeu du pendu enrichi et interactif.",
+    features: [
+      "Création de compte, personnalisation profil (avatar, fond).",
+      "Niveaux de difficulté, timer, système de score et indices.",
+      "Boutique virtuelle, sauvegarde des stats, progression persistante."
+    ],
+    technologies: ["JavaFX","MongoDB"],
+    icon: <FaJava />,
+    color: "#5382A1",
+    github: "#"
+  },
+  {
+    title: "GymManager",
+    description: "Système de gestion d’une salle de sport.",
+    features: [
+      "Gestion centralisée des abonnements, coachs, clients et séances",
+      "Planification des entraînements et suivi de la présence en temps réel",
+      "Tableau de bord d’administration avec statistiques et indicateurs clés",
+      "Système d’authentification multi-rôle."
+    ],
+    technologies: ["Angular", "Spring Boot", "MySQL"],
+    icon: <SiAngular />,
+    color: "#DD0031",
+    github: "#"
+  },
+  {
+    title: "FitFood",
+    description: "Application web intelligente de création de plans alimentaires personnalisés",
+    features: [
+      "Scraping, nettoyage et export de recettes santé",
+      "Analyse des apports et visualisation des nutriments",
+      "Création dynamique de plans selon les besoins sportifs",
+      "Prédictions automatisées pour adapter les repas"
+    ],
+    technologies: ["Python", "Flask", "Pandas", "NumPy", "Matplotlib", "BeautifulSoup", "Regex", "scikit-learn"],
+    icon: <SiFlask />,
+    color: "#000000",
+    github: "#"
+  },
+  {
+    title: "BeeConnect",
+    description: "Application mobile pour surveiller les ruches à distance.",
+    features: [
+      "Surveillance des capteurs IoT (température, humidité, bruit).",
+      "Alertes en cas de variation anormale.",
+      "Historique et visualisation graphique des données.",
+      "Intégration des APIs météo, Google Maps et assistant via ChatGPT."
+    ],
+    technologies: ["Android", "Spring Boot", "MySQL", "Firebase", "ThingSpeak", "PlatformIO", "Arduino", "ISIS", "OpenWeatherMap API", "Google Maps API", "Chatbot"],
+    icon: <FaAndroid />,
+    color: "#3DDC84",
+    github: "#"
+  },
+  {
+    title: "StageConnect",
+    description: "Faciliter la mise en relation entre étudiants et entreprises pour les stages.",
+    features: [
+      "Portails dédiés pour les entreprises et les étudiants avec authentification sécurisée",
+      "Publication, gestion et filtrage des offres de stage",
+      "Candidature en ligne avec suivi de statut, pièces jointes et notifications",
+      "Messagerie intégrée pour faciliter les échanges en temps réel",
+      "Interface responsive disponible sur web et mobile"
+    ],
+    technologies: ["Spring Boot", "React", "Android", "MySQL"],
+    icon: <SiSpring />,
+    color: "#6DB33F",
+    github: "#"
+  },
   {
     title: "EasyColoc",
     description: "Plateforme web pour simplifier la colocation entre étudiants.",
@@ -16,32 +99,6 @@ const projects = [
     technologies: ["Symfony", "MySQL", "JavaScript"],
     icon: <SiSymfony />,
     color: "#000000",
-    github: "#"
-  },
-  {
-    title: "StageConnect",
-    description: "Faciliter la mise en relation entre étudiants et entreprises pour les stages.",
-    features: [
-      "Espace entreprise et étudiant avec authentification sécurisée.",
-      "Publication et gestion d’offres de stage.",
-      "Candidature en ligne avec suivi, messagerie et notifications."
-    ],
-    technologies: ["Spring Boot", "React", "Android", "MySQL"],
-    icon: <SiSpring />,
-    color: "#6DB33F",
-    github: "#"
-  },
-  {
-    title: "BeeConnect",
-    description: "Application mobile pour surveiller les ruches à distance.",
-    features: [
-      "Connexion à des capteurs IoT (température, humidité, bruit).",
-      "Alertes en cas de variation anormale.",
-      "Historique et visualisation graphique des données."
-    ],
-    technologies: ["Spring Boot", "Android", "PlatformIO", "ThingSpeak"],
-    icon: <FaAndroid />,
-    color: "#3DDC84",
     github: "#"
   },
   {
@@ -81,46 +138,6 @@ const projects = [
     technologies: ["PHP", "MySQL"],
     icon: <FaPhp />,
     color: "#777BB4",
-    github: "#"
-  },
-  {
-    title: "SmartPot",
-    description: "Système expert intelligent pour l’arrosage des plantes.",
-    features: [
-      "Moteur d’inférence avec chaînage avant, arrière et mixte.",
-      "25 règles expertes pour diagnostiquer les besoins hydriques.",
-      "Alertes automatiques et recommandations."
-    ],
-    technologies: ["Python"],
-    icon: <SiPython />,
-    color: "#3776AB",
-    github: "#"
-  },
-  {
-    title: "LePendu",
-    description: "Jeu du pendu enrichi et interactif.",
-    features: [
-      "Création de compte, personnalisation profil (avatar, fond).",
-      "Niveaux de difficulté, timer, système de score et indices.",
-      "Boutique virtuelle, sauvegarde des stats, progression persistante."
-    ],
-    technologies: ["JavaFX","MongoDB"],
-    icon: <FaJava />,
-    color: "#5382A1",
-    github: "#"
-  },
-  {
-    title: "GymManager",
-    description: "Système de gestion d’une salle de sport.",
-    features: [
-      "Gestion abonnements, séances, coachs et clients.",
-      "Planification entraînements, suivi des présences.",
-      "Tableau de bord admin avec statistiques.",
-      "Authentification selon rôles (admin, coach, client)."
-    ],
-    technologies: ["Angular", "Spring Boot"],
-    icon: <SiAngular />,
-    color: "#DD0031",
     github: "#"
   }
 ];

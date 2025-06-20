@@ -14,6 +14,7 @@ const navItems = [
   { name: 'Projets', target: 'projects' },
   { name: 'Compétences', target: 'skills' },
   { name: 'Langue', target: 'languages' },
+  { name: 'Certifications', target: 'certifications' },
   { name: 'Qualité', target: 'qualities' },
   { name: 'Contact', target: 'contact' }
 ];
