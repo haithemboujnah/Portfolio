@@ -2321,3 +2321,36 @@ p {
   }
 }
 
+/* Add to your global CSS */
+.language-switcher {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  color: var(--text);
+  font-weight: 500;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s;
+}
+
+.language-switcher:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.globe-icon {
+  font-size: 1.2rem;
+}
+
+.language-code {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+/* For mobile */
+.mobile-actions .language-switcher {
+  margin: 1rem 0;
+  justify-content: center;
+}

@@ -1,31 +1,58 @@
 // src/components/Education.jsx
 import { motion } from 'framer-motion';
-
-const education = [
-  {
-    id: 1,
-    institution: "École Nationale des Sciences de l'Informatique (ENSI)",
-    degree: "Mastère de recherche en Sciences de l'informatique",
-    year: "2024 - 2025",
-    description: "Spécialisation en recherche appliquée dans les domaines avancés de l'informatique."
-  },
-  {
-    id: 2,
-    institution: "Institut Supérieur des Études Technologiques de Béja (ISET Béja)",
-    degree: "Licence nationale en Technologies de l'Informatique",
-    year: "2021 - 2024",
-    description: "Formation axée sur le développement logiciel, les systèmes informatiques et les technologies web."
-  },
-  {
-    id: 3,
-    institution: "Lycée Mohamed Larbi Chammari El Ouardia",
-    degree: "Baccalauréat en Sciences Informatiques",
-    year: "2021",
-    description: "Formation secondaire avec spécialisation en informatique et bases en algorithmique et programmation."
-  }
-];
+import { useTranslation } from '../hooks/useTranslation';
 
 const Education = () => {
+  const { language } = useTranslation();
+
+  const education = language === 'fr'
+    ? [
+        {
+          id: 1,
+          institution: "École Nationale des Sciences de l'Informatique (ENSI)",
+          degree: "Mastère de recherche en Sciences de l'informatique",
+          year: "2024 - 2025",
+          description: "Spécialisation en recherche appliquée dans les domaines avancés de l'informatique."
+        },
+        {
+          id: 2,
+          institution: "Institut Supérieur des Études Technologiques de Béja (ISET Béja)",
+          degree: "Licence nationale en Technologies de l'Informatique",
+          year: "2021 - 2024",
+          description: "Formation axée sur le développement logiciel, les systèmes informatiques et les technologies web."
+        },
+        {
+          id: 3,
+          institution: "Lycée Mohamed Larbi Chammari El Ouardia",
+          degree: "Baccalauréat en Sciences Informatiques",
+          year: "2021",
+          description: "Formation secondaire avec spécialisation en informatique et bases en algorithmique et programmation."
+        }
+      ]
+    : [
+        {
+          id: 1,
+          institution: "National School of Computer Science (ENSI)",
+          degree: "Master's Degree in Computer Science Research",
+          year: "2024 - 2025",
+          description: "Specialized in applied research in advanced areas of computer science."
+        },
+        {
+          id: 2,
+          institution: "Higher Institute of Technological Studies of Béja (ISET Béja)",
+          degree: "Bachelor’s Degree in Computer Technologies",
+          year: "2021 - 2024",
+          description: "Focused on software development, IT systems, and web technologies."
+        },
+        {
+          id: 3,
+          institution: "Mohamed Larbi Chammari High School - El Ouardia",
+          degree: "High School Diploma in Computer Science",
+          year: "2021",
+          description: "Secondary education with a specialization in computer science, algorithmics, and programming."
+        }
+      ];
+
   return (
     <section id="education" className="education-section">
       <div className="container">
@@ -36,7 +63,9 @@ const Education = () => {
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
-          <span className="text-gradient">Education</span>
+          <span className="text-gradient">
+            {language === 'fr' ? 'Éducation' : 'Education'}
+          </span>
         </motion.h2>
 
         <div className="timeline">

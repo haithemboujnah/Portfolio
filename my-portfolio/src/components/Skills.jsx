@@ -1,62 +1,121 @@
 // src/components/Skills.jsx
 import { motion } from 'framer-motion';
+import { useTranslation } from '../hooks/useTranslation';
 
 const Skills = () => {
-  const skillCategories = [
-    {
-      title: "Systèmes d'exploitation",
-      skills: [
-        { name: "Linux", level: 60 },
-        { name: "Windows", level: 95 }
+  const { language } = useTranslation();
+
+  const skillCategories = language === 'fr'
+    ? [
+        {
+          title: "Systèmes d'exploitation",
+          skills: [
+            { name: "Linux", level: 60 },
+            { name: "Windows", level: 95 }
+          ]
+        },
+        {
+          title: "Langages de programmation",
+          skills: [
+            { name: "C", level: 85 },
+            { name: "C++", level: 85 },
+            { name: "Python", level: 80 },
+            { name: "Java", level: 75 },
+            { name: "JavaScript", level: 85 },
+            { name: "PHP", level: 80 },
+            { name: "Arduino", level: 75 }
+          ]
+        },
+        {
+          title: "Frameworks",
+          skills: [
+            { name: "React", level: 85 },
+            { name: "Angular", level: 70 },
+            { name: "Java EE", level: 70 },
+            { name: "JavaFX", level: 70 },
+            { name: "Symfony", level: 70 },
+            { name: "Node.js", level: 75 },
+            { name: "Express.js", level: 70 },
+            { name: "Spring Boot", level: 80 },
+            { name: "Flutter", level: 70 },
+            { name: "Android", level: 75 }
+          ]
+        },
+        {
+          title: "Bases de Données",
+          skills: [
+            { name: "MySQL", level: 85 },
+            { name: "SQLite", level: 85 },
+            { name: "Oracle", level: 75 },
+            { name: "MongoDB", level: 75 }
+          ]
+        },
+        {
+          title: "Web Services",
+          skills: [
+            { name: "REST", level: 80 },
+            { name: "SOAP", level: 70 },
+            { name: "RPC", level: 65 },
+            { name: "gRPC", level: 60 },
+            { name: "ThingSpeak", level: 55 }
+          ]
+        }
       ]
-    },
-    {
-      title: "Langages de programmation",
-      skills: [
-        { name: "C", level: 85 },
-        { name: "C++", level: 85 },
-        { name: "Python", level: 80 },
-        { name: "Java", level: 75 },
-        { name: "JavaScript", level: 85 },
-        { name: "PHP", level: 80 },
-        { name: "Arduino", level: 75 }
-      ]
-    },
-    {
-      title: "Frameworks",
-      skills: [
-        { name: "React", level: 85 },
-        { name: "Angular", level: 70 },
-        { name: "Java EE", level: 70 },
-        { name: "JavaFX", level: 70 },
-        { name: "Symfony", level: 70 },
-        { name: "Node.js", level: 75 },
-        { name: "Express.js", level: 70 },
-        { name: "Spring Boot", level: 80 },
-        { name: "Flutter", level: 70 },
-        { name: "Android", level: 75 }
-      ]
-    },
-    {
-      title: "Bases de Données",
-      skills: [
-        { name: "MySQL", level: 85 },
-        { name: "SQLite", level: 85 },
-        { name: "Oracle", level: 75 },
-        { name: "MongoDB", level: 75 }
-      ]
-    },
-    {
-      title: "Web Services",
-      skills: [
-        { name: "REST", level: 80 },
-        { name: "SOAP", level: 70 },
-        { name: "RPC", level: 65 },
-        { name: "gRPC", level: 60 },
-        { name: "ThingSpeak", level: 55 }
-      ]
-    }
-  ];
+    : [
+        {
+          title: "Operating Systems",
+          skills: [
+            { name: "Linux", level: 60 },
+            { name: "Windows", level: 95 }
+          ]
+        },
+        {
+          title: "Programming Languages",
+          skills: [
+            { name: "C", level: 85 },
+            { name: "C++", level: 85 },
+            { name: "Python", level: 80 },
+            { name: "Java", level: 75 },
+            { name: "JavaScript", level: 85 },
+            { name: "PHP", level: 80 },
+            { name: "Arduino", level: 75 }
+          ]
+        },
+        {
+          title: "Frameworks",
+          skills: [
+            { name: "React", level: 85 },
+            { name: "Angular", level: 70 },
+            { name: "Java EE", level: 70 },
+            { name: "JavaFX", level: 70 },
+            { name: "Symfony", level: 70 },
+            { name: "Node.js", level: 75 },
+            { name: "Express.js", level: 70 },
+            { name: "Spring Boot", level: 80 },
+            { name: "Flutter", level: 70 },
+            { name: "Android", level: 75 }
+          ]
+        },
+        {
+          title: "Databases",
+          skills: [
+            { name: "MySQL", level: 85 },
+            { name: "SQLite", level: 85 },
+            { name: "Oracle", level: 75 },
+            { name: "MongoDB", level: 75 }
+          ]
+        },
+        {
+          title: "Web Services",
+          skills: [
+            { name: "REST", level: 80 },
+            { name: "SOAP", level: 70 },
+            { name: "RPC", level: 65 },
+            { name: "gRPC", level: 60 },
+            { name: "ThingSpeak", level: 55 }
+          ]
+        }
+      ];
 
   return (
     <section id="skills" className="skills-section">
@@ -68,7 +127,9 @@ const Skills = () => {
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
-          <span className="text-gradient">Compétences Techniques</span>
+          <span className="text-gradient">
+            {language === 'fr' ? 'Compétences Techniques' : 'Technical Skills'}
+          </span>
         </motion.h2>
 
         {skillCategories.map((category, catIndex) => (

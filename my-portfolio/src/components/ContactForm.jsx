@@ -3,10 +3,12 @@ import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { FaPaperPlane, FaMapMarkerAlt, FaPhone, FaEnvelope } from 'react-icons/fa';
 import { useTheme } from '../context/ThemeContext';
+import { useTranslation } from '../hooks/useTranslation';
 import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const { theme } = useTheme();
+  const { language } = useTranslation();
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
   const serviceID = 'service_zal0f6g';
@@ -19,25 +21,30 @@ const Contact = () => {
       .then(() => {
         emailjs.send(serviceID, userTemplateID, data, publicKey)
           .then(() => {
-            alert('Message envoyé avec succès ! Vous recevrez une confirmation par email.');
+            alert(language === 'fr'
+              ? 'Message envoyé avec succès ! Vous recevrez une confirmation par email.'
+              : 'Message sent successfully! You will receive a confirmation by email.');
             reset();
           })
           .catch((err) => {
             console.error('Erreur auto-réponse :', err);
-            alert('Le message a été envoyé, mais la confirmation par email a échoué.');
+            alert(language === 'fr'
+              ? 'Le message a été envoyé, mais la confirmation par email a échoué.'
+              : 'The message was sent, but email confirmation failed.');
             reset();
           });
       })
       .catch((err) => {
         console.error('Erreur envoi admin :', err);
-        alert("Une erreur s'est produite lors de l'envoi du message.");
+        alert(language === 'fr'
+          ? "Une erreur s'est produite lors de l'envoi du message."
+          : "An error occurred while sending the message.");
       });
   };
 
   return (
     <section id="contact" className={`contact-section ${theme}`}>
       <div className="animated-bg" />
-      
       <div className="container">
         <motion.h2
           className="tous-title"
@@ -46,9 +53,11 @@ const Contact = () => {
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
-          <span className="text-gradient">Contactez-moi</span>
+          <span className="text-gradient">
+            {language === 'fr' ? 'Contactez-moi' : 'Contact Me'}
+          </span>
         </motion.h2>
-        
+
         <div className="contact-grid">
           <motion.div
             className="contact-info"
@@ -57,28 +66,28 @@ const Contact = () => {
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <h3>Informations de contact</h3>
-            
+            <h3>{language === 'fr' ? 'Informations de contact' : 'Contact Information'}</h3>
+
             <div className="info-item">
               <div className="info-icon">
                 <FaMapMarkerAlt />
               </div>
               <div>
-                <h4>Localisation</h4>
+                <h4>{language === 'fr' ? 'Localisation' : 'Location'}</h4>
                 <p>Sidi Hassine, Tunis</p>
               </div>
             </div>
-            
+
             <div className="info-item">
               <div className="info-icon">
                 <FaPhone />
               </div>
               <div>
-                <h4>Téléphone</h4>
+                <h4>{language === 'fr' ? 'Téléphone' : 'Phone'}</h4>
                 <p>+216 24840945</p>
               </div>
             </div>
-            
+
             <div className="info-item">
               <div className="info-icon">
                 <FaEnvelope />
@@ -89,7 +98,7 @@ const Contact = () => {
               </div>
             </div>
           </motion.div>
-          
+
           <motion.div
             className="contact-form"
             initial={{ opacity: 0, x: 50 }}
@@ -101,62 +110,64 @@ const Contact = () => {
               <div className="form-group">
                 <input
                   type="text"
-                  placeholder="Votre nom"
-                  {...register("name", { required: "Ce champ est requis" })}
+                  placeholder={language === 'fr' ? "Votre nom" : "Your name"}
+                  {...register("name", { required: language === 'fr' ? "Ce champ est requis" : "This field is required" })}
                   className={errors.name ? 'error' : ''}
                 />
                 {errors.name && <span className="error-message">{errors.name.message}</span>}
               </div>
-              
+
               <div className="form-group">
                 <input
                   type="email"
-                  placeholder="Votre email"
-                  {...register("email", { 
-                    required: "Ce champ est requis",
+                  placeholder={language === 'fr' ? "Votre email" : "Your email"}
+                  {...register("email", {
+                    required: language === 'fr' ? "Ce champ est requis" : "This field is required",
                     pattern: {
                       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: "Email invalide"
+                      message: language === 'fr' ? "Email invalide" : "Invalid email"
                     }
                   })}
                   className={errors.email ? 'error' : ''}
                 />
                 {errors.email && <span className="error-message">{errors.email.message}</span>}
               </div>
-              
+
               <div className="form-group">
                 <input
                   type="text"
-                  placeholder="Sujet"
-                  {...register("subject", { required: "Ce champ est requis" })}
+                  placeholder={language === 'fr' ? "Sujet" : "Subject"}
+                  {...register("subject", { required: language === 'fr' ? "Ce champ est requis" : "This field is required" })}
                   className={errors.subject ? 'error' : ''}
                 />
                 {errors.subject && <span className="error-message">{errors.subject.message}</span>}
               </div>
-              
+
               <div className="form-group">
                 <textarea
-                  placeholder="Votre message"
+                  placeholder={language === 'fr' ? "Votre message" : "Your message"}
                   rows="5"
-                  {...register("message", { 
-                    required: "Ce champ est requis",
+                  {...register("message", {
+                    required: language === 'fr' ? "Ce champ est requis" : "This field is required",
                     minLength: {
                       value: 10,
-                      message: "Le message doit contenir au moins 10 caractères"
+                      message: language === 'fr'
+                        ? "Le message doit contenir au moins 10 caractères"
+                        : "The message must contain at least 10 characters"
                     }
                   })}
                   className={errors.message ? 'error' : ''}
                 />
                 {errors.message && <span className="error-message">{errors.message.message}</span>}
               </div>
-              
+
               <motion.button
                 type="submit"
                 className="submit-btn"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Envoyer <FaPaperPlane />
+                {language === 'fr' ? 'Envoyer' : 'Send'} <FaPaperPlane />
               </motion.button>
             </form>
           </motion.div>

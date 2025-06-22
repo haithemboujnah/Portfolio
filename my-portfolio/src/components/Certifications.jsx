@@ -1,10 +1,31 @@
-
+// src/components/Certifications.jsx
 import { motion } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
+import { useTranslation } from '../hooks/useTranslation';
 import { FaCertificate, FaExternalLinkAlt } from 'react-icons/fa';
 
 const Certifications = () => {
   const { theme } = useTheme();
+  const { language } = useTranslation();
+
+  const labels = {
+    fr: {
+      title: 'Certifications',
+      issued: 'Délivrée par',
+      date: 'Date obtenue',
+      id: 'ID de certification',
+      verify: 'Vérifier la certification',
+    },
+    en: {
+      title: 'Certifications',
+      issued: 'Issued by',
+      date: 'Date obtained',
+      id: 'Certification ID',
+      verify: 'Verify certification',
+    }
+  };
+
+  const t = labels[language];
 
   const certifications = [
     {
@@ -44,7 +65,7 @@ const Certifications = () => {
           className="section-title"
         >
           <FaCertificate className="title-icon" />
-          <span className="text-gradient">Certifications</span>
+          <span className="text-gradient">{t.title}</span>
         </motion.h2>
 
         <div className="certifications-grid">
@@ -64,17 +85,17 @@ const Certifications = () => {
                 </div>
                 <div>
                   <h3>{cert.title}</h3>
-                  <p className="issuer">{cert.issuer}</p>
+                  <p className="issuer">{t.issued}: {cert.issuer}</p>
                 </div>
               </div>
 
               <div className="certification-details">
                 <div className="detail-item">
-                  <span>Date Obtenue:</span>
+                  <span>{t.date}:</span>
                   <span>{cert.date}</span>
                 </div>
                 <div className="detail-item">
-                  <span>ID de Certification:</span>
+                  <span>{t.id}:</span>
                   <span>{cert.credentialId}</span>
                 </div>
               </div>
@@ -91,7 +112,7 @@ const Certifications = () => {
                 rel="noopener noreferrer"
                 className="verification-link"
               >
-                Vérifier la certification <FaExternalLinkAlt />
+                {t.verify} <FaExternalLinkAlt />
               </a>
             </motion.div>
           ))}

@@ -17,7 +17,7 @@ import { ThemeProvider } from './context/ThemeContext';
 import AnimatedBackground from './components/AnimatedBackground';
 import Loading from './components/Loading';
 import { useState, useEffect } from 'react';
-
+import { LanguageProvider } from './context/LanguageContext';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -32,6 +32,7 @@ function App() {
 
   return (
     <ThemeProvider>
+      <LanguageProvider>
       {isLoading ? (
         <Loading />
       ) : (
@@ -61,6 +62,7 @@ function App() {
       </Router>
       </>
       )}
+      </LanguageProvider>
     </ThemeProvider>
   );
 }

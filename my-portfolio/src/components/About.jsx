@@ -1,10 +1,63 @@
 // src/components/About.jsx
 import { motion } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
+import { useTranslation } from '../hooks/useTranslation';
 import { FaUser, FaCode, FaLightbulb, FaGraduationCap } from 'react-icons/fa';
 
 const About = () => {
   const { theme } = useTheme();
+  const { language } = useTranslation();
+
+  const sectionTitle = language === 'fr' ? 'À Propos' : 'About';
+  const description1 = language === 'fr'
+    ? "Jeune diplômé en Développement des Systèmes d'Information, je suis passionné par l'informatique et déterminé à m'investir dans des projets innovants."
+    : "Young graduate in Information Systems Development, passionate about computing and eager to contribute to innovative projects.";
+
+  const description2 = language === 'fr'
+    ? "Fort d'une formation académique solide et de compétences aiguisées en conception, développement, et maintenance de systèmes d'information."
+    : "Backed by a solid academic background and sharp skills in designing, developing, and maintaining information systems.";
+
+  const degreeTitle = language === 'fr'
+    ? "Master en Sciences de l'informatique"
+    : "Master’s Degree in Computer Science";
+
+  const degreeSchool = "ENSI (2024–2025)";
+
+  const highlights = language === 'fr'
+    ? [
+        {
+          icon: <FaUser />,
+          title: "Profil",
+          content: "Développeur full-stack avec une spécialisation backend"
+        },
+        {
+          icon: <FaCode />,
+          title: "Objectif",
+          content: "Contribuer à des projets innovants et continuer à apprendre"
+        },
+        {
+          icon: <FaLightbulb />,
+          title: "Approche",
+          content: "Développement axé utilisateur et solutions créatives"
+        }
+      ]
+    : [
+        {
+          icon: <FaUser />,
+          title: "Profile",
+          content: "Full-stack developer with backend specialization"
+        },
+        {
+          icon: <FaCode />,
+          title: "Goal",
+          content: "Contribute to innovative projects and keep learning"
+        },
+        {
+          icon: <FaLightbulb />,
+          title: "Approach",
+          content: "User-focused development and creative solutions"
+        }
+      ];
 
   return (
     <section id="about" className={`about-section ${theme}`}>
@@ -16,7 +69,7 @@ const About = () => {
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
-           <span className="text-gradient">À Propos</span>
+          <span className="text-gradient">{sectionTitle}</span>
         </motion.h2>
 
         <div className="about-content">
@@ -33,22 +86,20 @@ const About = () => {
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.5 }}
               viewport={{ once: true }}
-              style={{ color:"var(--greeting-color)",fontStyle:"italic"}}
+              style={{ color:"var(--greeting-color)", fontStyle:"italic" }}
             >
-              Jeune diplômé en Développement des Systèmes d'Information, je suis passionné par 
-              l'informatique et déterminé à m'investir dans des projets innovants.
+              {description1}
             </motion.p>
-            
+
             <motion.p
               className="about-description"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.5 }}
               viewport={{ once: true }}
-              style={{ color:"var(--greeting-color)",fontStyle:"italic"}}
+              style={{ color:"var(--greeting-color)", fontStyle:"italic" }}
             >
-              Fort d'une formation académique solide et de compétences aiguisées en conception, 
-              développement, et maintenance de systèmes d'information.
+              {description2}
             </motion.p>
 
             <motion.div
@@ -63,31 +114,15 @@ const About = () => {
                 <FaGraduationCap className="graduation-icon" />
               </div>
               <div>
-                <h4>Master en Sciences de l'informatique</h4>
-                <p>ENSI (2024-2025)</p>
+                <h4>{degreeTitle}</h4>
+                <p>{degreeSchool}</p>
               </div>
             </motion.div>
           </motion.div>
         </div>
 
         <div className="highlights-grid">
-          {[
-            {
-              icon: <FaUser />,
-              title: "Profil",
-              content: "Développeur full-stack avec une spécialisation frontend"
-            },
-            {
-              icon: <FaCode />,
-              title: "Objectif",
-              content: "Contribuer à des projets innovants et continuer à apprendre"
-            },
-            {
-              icon: <FaLightbulb />,
-              title: "Approche",
-              content: "Développement axé utilisateur et solutions créatives"
-            }
-          ].map((item, index) => (
+          {highlights.map((item, index) => (
             <motion.div
               key={index}
               className={`highlight-card ${theme}`}

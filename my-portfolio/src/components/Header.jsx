@@ -3,8 +3,10 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import profileImage from '../assets/images/photo.png';
+import { useTranslation } from '../hooks/useTranslation';
 
 const Typewriter = ({ titles, delay = 2000 }) => {
+  const { t, language } = useTranslation();
   const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
   const [currentText, setCurrentText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
@@ -43,20 +45,31 @@ const Typewriter = ({ titles, delay = 2000 }) => {
       className="typewriter-text"
       style={{ fontSize: "28px",fontFamily:"cursive",fontStyle:"italic"}}
     >
-      Full-Stack Developer | {currentText}
+      
+      {language === 'fr' ? "Développeur Full-Stack" : "Full-Stack Developer "} | {currentText}
       <span className="cursor">|</span>
     </motion.h1>
   );
 };
 
 const Header = () => {
-  const roles = [
-    "Web Developer",
-    "Mobile Developer",
-    "UI/UX Enthusiast",
-    "Tech Innovator",
-    "Problem Solver"
-  ];
+  const { t, language } = useTranslation();
+
+  const roles = language === 'fr' 
+    ? [
+        "Développeur Web",
+        "Développeur Mobile",
+        "Passionné UI/UX",
+        "Innovateur Technologique",
+        "Résolveur de Problèmes"
+      ]
+    : [
+        "Web Developer",
+        "Mobile Developer",
+        "UI/UX Enthusiast",
+        "Tech Innovator",
+        "Problem Solver"
+      ];
 
   return (
     <section id="home" className="header-section">
@@ -75,7 +88,7 @@ const Header = () => {
             style={{ fontSize: "28px",color:"var(--greeting-color)",fontFamily:"cursive",fontStyle:"italic"}}
           >
             
-            Hello, I'm
+            {language === 'fr' ? "Bonjour, je suis" : "Hello, I'm"}
           </motion.h3>
           
           <motion.h1
@@ -99,8 +112,7 @@ const Header = () => {
             className="description"
             style={{ color:"var(--greeting-color)",fontStyle:"italic"}}
           >
-            I build exceptional digital experiences with modern technologies.
-            Focused on creating intuitive and responsive user interfaces.
+            {language === 'fr' ? "Je conçois des expériences numériques exceptionnelles avec des technologies modernes. Je me concentre sur la création d'interfaces utilisateur intuitives et réactives." : "I build exceptional digital experiences with modern technologies. Focused on creating intuitive and responsive user interfaces."}
           </motion.p>
         
         </motion.div>

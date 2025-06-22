@@ -1,14 +1,29 @@
 // src/components/Languages.jsx
 import { motion } from 'framer-motion';
 import { FaLanguage } from 'react-icons/fa';
-
-const languages = [
-  { name: 'Arabe', level: 'Fluent', proficiency: 100 },
-  { name: 'French', level: 'Professional', proficiency: 80 },
-  { name: 'English', level: 'Intermediate', proficiency: 70 },
-];
+import { useTranslation } from '../hooks/useTranslation';
 
 const Languages = () => {
+  const { language } = useTranslation();
+
+  const languages = [
+    {
+      name: language === 'fr' ? 'Arabe' : 'Arabic',
+      level: language === 'fr' ? 'Courant' : 'Fluent',
+      proficiency: 100
+    },
+    {
+      name: language === 'fr' ? 'Français' : 'French',
+      level: language === 'fr' ? 'Professionnel' : 'Professional',
+      proficiency: 80
+    },
+    {
+      name: language === 'fr' ? 'Anglais' : 'English',
+      level: language === 'fr' ? 'Intermédiaire' : 'Intermediate',
+      proficiency: 70
+    }
+  ];
+
   return (
     <section id="languages" className="languages-section">
       <div className="container">
@@ -20,8 +35,11 @@ const Languages = () => {
           viewport={{ once: true }}
         >
           <FaLanguage className="section-icon" />
-          <span className="text-gradient">Languages</span>
+          <span className="text-gradient">
+            {language === 'fr' ? 'Langues' : 'Languages'}
+          </span>
         </motion.h2>
+
         <div className="languages-grid">
           {languages.map((lang, index) => (
             <motion.div
@@ -35,13 +53,14 @@ const Languages = () => {
                 <h3>{lang.name}</h3>
                 <span className="level">{lang.level}</span>
               </div>
+
               <div className="proficiency-bar">
                 <motion.div
                   initial={{ width: 0 }}
                   animate={{ width: `${lang.proficiency}%` }}
                   transition={{ duration: 1, delay: index * 0.2 }}
                   className="proficiency-level"
-                  style={{ 
+                  style={{
                     background: `linear-gradient(to right, #3a86ff, #8338ec)`,
                     width: `${lang.proficiency}%`
                   }}
