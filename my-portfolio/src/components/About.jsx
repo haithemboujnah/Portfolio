@@ -63,13 +63,14 @@ const About = () => {
     <section id="about" className={`about-section ${theme}`}>
       <div className="container">
         <motion.h2
-          className="section-title"
+          className="tous-title"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
-          <span className="text-gradient">{sectionTitle}</span>
+          <span className="text-gradient">
+            {sectionTitle}</span>
         </motion.h2>
 
         <div className="about-content">

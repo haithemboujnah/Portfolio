@@ -118,7 +118,7 @@ const Header = () => {
         </motion.div>
         
         
-<motion.div 
+        <motion.div 
           className="profile-container"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}

@@ -1,40 +1,21 @@
-// src/components/Footer.jsx
 import { motion } from 'framer-motion';
-import { useTheme } from '../context/ThemeContext';
-import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { useTranslation } from '../hooks/useTranslation';
 
 const Footer = () => {
-  const { theme, toggleTheme } = useTheme();
   const { language } = useTranslation();
   const currentYear = new Date().getFullYear();
 
   const content = {
     fr: {
-      name: "Haithem Boujnah",
-      description: "Développeur Full Stack passionné par la création de solutions innovantes.",
-      quickLinks: "Liens rapides",
-      contact: "Contact",
-      social: "Réseaux sociaux",
-      links: ["Accueil", "À propos", "Projets", "Contact"],
-      email: "haithemboujnah1@gmail.com",
-      phone: "+216 24840945",
-      location: "Sidi Hassine, Tunis",
-      themeToggle: theme === 'dark' ? "Mode clair" : "Mode sombre",
-      rights: `Tous droits réservés.`
+      tagline: "Développeur Full Stack passionné par la création de solutions innovantes.",
+      rights: `© ${currentYear} Haithem Boujnah. Tous droits réservés.`,
+      connect: "Connectez-vous avec moi"
     },
     en: {
-      name: "Haithem Boujnah",
-      description: "Full Stack Developer passionate about building innovative solutions.",
-      quickLinks: "Quick Links",
-      contact: "Contact",
-      social: "Social Media",
-      links: ["Home", "About", "Projects", "Contact"],
-      email: "haithemboujnah1@gmail.com",
-      phone: "+216 24840945",
-      location: "Sidi Hassine, Tunis",
-      themeToggle: theme === 'dark' ? "Light Mode" : "Dark Mode",
-      rights: `All rights reserved.`
+      tagline: "Full Stack Developer passionate about building innovative solutions.",
+      rights: `© ${currentYear} Haithem Boujnah. All rights reserved.`,
+      connect: "Connect with me"
     }
   };
 
@@ -46,56 +27,58 @@ const Footer = () => {
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.8 }}
           viewport={{ once: true }}
           className="footer-content"
         >
-          <div className="footer-section">
-            <h3>{t.name}</h3>
-            <p>{t.description}</p>
-          </div>
-
-          <div className="footer-section">
-            <h4>{t.quickLinks}</h4>
-            <ul>
-              <li><a href="#home">{t.links[0]}</a></li>
-              <li><a href="#about">{t.links[1]}</a></li>
-              <li><a href="#projects">{t.links[2]}</a></li>
-              <li><a href="#contact">{t.links[3]}</a></li>
-            </ul>
-          </div>
-
-          <div className="footer-section">
-            <h4>{t.contact}</h4>
-            <ul>
-              <li><FaEnvelope /> {t.email}</li>
-              <li><FaPhone /> {t.phone}</li>
-              <li><FaMapMarkerAlt /> {t.location}</li>
-            </ul>
-          </div>
-
-          <div className="footer-section">
-            <h4>{t.social}</h4>
-            <div className="social-icons">
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer">
-                <FaGithub />
-              </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-                <FaLinkedin />
-              </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                <FaTwitter />
-              </a>
-            </div>
-            <button onClick={toggleTheme} className="theme-toggle">
-              {t.themeToggle}
-            </button>
+          <div className="footer-main">
+            <motion.h3 
+              className="footer-name"
+              whileHover={{ scale: 1.02 }}
+            >
+              <h1 className="footer-nameh">Haithem Boujnah</h1>
+            </motion.h3>
+            <p className="footer-tagline">{t.tagline}</p>
+            
+            <motion.div 
+              className="social-links"
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              <p className="connect-text">{t.connect}</p>
+              <div className="social-icons">
+                <motion.a 
+                  href="https://github.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  whileHover={{ y: -3, scale: 1.1 }}
+                  aria-label="GitHub"
+                >
+                  <FaGithub />
+                </motion.a>
+                <motion.a 
+                  href="https://linkedin.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  whileHover={{ y: -3, scale: 1.1 }}
+                  aria-label="LinkedIn"
+                >
+                  <FaLinkedin />
+                </motion.a>
+                <motion.a 
+                  href="https://twitter.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  whileHover={{ y: -3, scale: 1.1 }}
+                  aria-label="Twitter"
+                >
+                  <FaTwitter />
+                </motion.a>
+              </div>
+            </motion.div>
           </div>
         </motion.div>
-
-        <div className="footer-bottom">
-          <p>&copy; {currentYear} Haithem Boujnah. {t.rights}</p>
-        </div>
       </div>
     </footer>
   );

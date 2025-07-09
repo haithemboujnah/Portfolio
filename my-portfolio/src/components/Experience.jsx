@@ -1,6 +1,6 @@
 // src/components/Experience.jsx
 import { motion } from 'framer-motion';
-import { FaAndroid, FaPython, FaReact } from 'react-icons/fa';
+import { FaAndroid, FaJs, FaPython } from 'react-icons/fa';
 import { useTranslation } from '../hooks/useTranslation';
 
 const Experience = () => {
@@ -49,8 +49,8 @@ const Experience = () => {
             "Application des méthodologies Agile",
             "Optimisation des processus de relation client via CRM"
           ],
-          icon: <FaReact />,
-          color: "#61DAFB"
+          icon: <FaJs />,
+          color: "#b28900"
         }
       ]
     : [
@@ -95,8 +95,8 @@ const Experience = () => {
             "Applied Agile methodologies",
             "Improved customer processes using CRM tools"
           ],
-          icon: <FaReact />,
-          color: "#61DAFB"
+          icon: <FaJs/>,
+          color: "#b28900"
         }
       ];
 

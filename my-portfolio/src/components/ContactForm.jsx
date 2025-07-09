@@ -1,50 +1,78 @@
 // src/components/Contact.jsx
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useForm } from 'react-hook-form';
-import { FaPaperPlane, FaMapMarkerAlt, FaPhone, FaEnvelope } from 'react-icons/fa';
+import { FaPaperPlane} from 'react-icons/fa';
 import { useTheme } from '../context/ThemeContext';
 import { useTranslation } from '../hooks/useTranslation';
 import emailjs from '@emailjs/browser';
+import img from '../assets/images/mail.png'
+import Notification from './Notification';
+import { useState, useEffect } from 'react';
 
 const Contact = () => {
   const { theme } = useTheme();
   const { language } = useTranslation();
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
+  const [notification, setNotification] = useState(null);
 
   const serviceID = 'service_zal0f6g';
   const adminTemplateID = 'template_5h1kws7'; 
   const userTemplateID = 'template_auecp52';
   const publicKey = 'mwl4EKLttV9hmwgab';
 
+  const showNotification = (message, type) => {
+    setNotification({ message, type });
+    setTimeout(() => setNotification(null), 5000);
+  };
+
+  const [progress, setProgress] = useState(100);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProgress(prev => Math.max(prev - 1, 0));
+    }, 50);
+
+    return () => clearInterval(interval);
+  }, []);
+
   const onSubmit = (data) => {
     emailjs.send(serviceID, adminTemplateID, data, publicKey)
       .then(() => {
         emailjs.send(serviceID, userTemplateID, data, publicKey)
           .then(() => {
-            alert(language === 'fr'
-              ? 'Message envoyé avec succès ! Vous recevrez une confirmation par email.'
-              : 'Message sent successfully! You will receive a confirmation by email.');
+            showNotification(
+              language === 'fr' 
+                ? 'Message envoyé avec succès ! Vous recevrez une confirmation par email.' 
+                : 'Message sent successfully! You will receive a confirmation by email.',
+              'success'
+            );
             reset();
           })
           .catch((err) => {
             console.error('Erreur auto-réponse :', err);
-            alert(language === 'fr'
-              ? 'Le message a été envoyé, mais la confirmation par email a échoué.'
-              : 'The message was sent, but email confirmation failed.');
+            showNotification(
+              language === 'fr' 
+                ? 'Le message a été envoyé, mais la confirmation par email a échoué.' 
+                : 'The message was sent, but email confirmation failed.',
+              'warning'
+            );
             reset();
           });
       })
       .catch((err) => {
         console.error('Erreur envoi admin :', err);
-        alert(language === 'fr'
-          ? "Une erreur s'est produite lors de l'envoi du message."
-          : "An error occurred while sending the message.");
+        showNotification(
+          language === 'fr' 
+            ? "Une erreur s'est produite lors de l'envoi du message." 
+            : "An error occurred while sending the message.",
+          'error'
+        );
       });
   };
 
   return (
     <section id="contact" className={`contact-section ${theme}`}>
-      <div className="animated-bg" />
+      <div className="animated-bg" data-theme={theme} />
       <div className="container">
         <motion.h2
           className="tous-title"
@@ -59,45 +87,10 @@ const Contact = () => {
         </motion.h2>
 
         <div className="contact-grid">
-          <motion.div
-            className="contact-info"
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-          >
-            <h3>{language === 'fr' ? 'Informations de contact' : 'Contact Information'}</h3>
 
-            <div className="info-item">
-              <div className="info-icon">
-                <FaMapMarkerAlt />
-              </div>
-              <div>
-                <h4>{language === 'fr' ? 'Localisation' : 'Location'}</h4>
-                <p>Sidi Hassine, Tunis</p>
-              </div>
+            <div className="info-avatar">
+              <img src={img} alt="Contact Avatar" />
             </div>
-
-            <div className="info-item">
-              <div className="info-icon">
-                <FaPhone />
-              </div>
-              <div>
-                <h4>{language === 'fr' ? 'Téléphone' : 'Phone'}</h4>
-                <p>+216 24840945</p>
-              </div>
-            </div>
-
-            <div className="info-item">
-              <div className="info-icon">
-                <FaEnvelope />
-              </div>
-              <div>
-                <h4>Email</h4>
-                <p>haithemboujnah1@gmail.com</p>
-              </div>
-            </div>
-          </motion.div>
 
           <motion.div
             className="contact-form"
@@ -173,6 +166,16 @@ const Contact = () => {
           </motion.div>
         </div>
       </div>
+      <div className="notification-progress" style={{ width: `${progress}%` }} />
+      <AnimatePresence>
+        {notification && (
+          <Notification
+            message={notification.message}
+            type={notification.type}
+            onClose={() => setNotification(null)}
+          />
+        )}
+      </AnimatePresence>
     </section>
   );
 };

@@ -15,8 +15,8 @@ const Navbar = () => {
   const { language } = useTranslation();
 
   const labels = {
-    fr: ['Accueil', 'À propos', 'Éducation', 'Expérience', 'Projets', 'Compétences', 'Langues', 'Certifications', 'Qualités', 'Contact'],
-    en: ['Home', 'About', 'Education', 'Experience', 'Projects', 'Skills', 'Languages', 'Certifications', 'Qualities', 'Contact']
+    fr: ['Accueil', 'À propos', 'Éducation', 'Expérience', 'Projets', 'Compétences', 'Langues', 'Communauté', 'Qualités'],
+    en: ['Home', 'About', 'Education', 'Experience', 'Projects', 'Skills', 'Languages', 'Community', 'Qualities']
   };
 
   const navItems = [
@@ -27,7 +27,7 @@ const Navbar = () => {
     { target: 'projects' },
     { target: 'skills' },
     { target: 'languages' },
-    { target: 'certifications' },
+    { target: 'communitylife' },
     { target: 'qualities' },
     { target: 'contact' },
   ];
@@ -70,7 +70,7 @@ const Navbar = () => {
               </motion.li>
             ))}
           </ul>
-
+              
           <div className="nav-actions">
             <LanguageSwitcher />
             <motion.button
@@ -82,7 +82,24 @@ const Navbar = () => {
             >
               {theme === 'dark' ? <FaSun /> : <FaMoon />}
             </motion.button>
+            <motion
+                className="contact-btn"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Link
+                  to="contact"
+                  smooth={true}
+                  duration={500}
+                  activeClass="active"
+                  spy={true}
+                >
+                Contact Me
+                </Link>
+              </motion>
           </div>
+
+          
         </div>
 
         <motion.button 
@@ -126,6 +143,7 @@ const Navbar = () => {
                 ))}
               </ul>
 
+              
               <div className="mobile-actions">
                 <button onClick={toggleTheme} className="theme-toggle">
                   {theme === 'dark' ? <FaSun /> : <FaMoon />}

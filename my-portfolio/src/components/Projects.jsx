@@ -71,7 +71,7 @@ const Projects = () => {
         "Historique et visualisation graphique des données.",
         "Intégration des APIs météo, Google Maps et assistant via ChatGPT."
       ],
-      technologies: ["Android", "Spring Boot", "MySQL", "Firebase", "ThingSpeak", "PlatformIO", "Arduino", "ISIS", "OpenWeatherMap API", "Google Maps API", "Chatbot"],
+      technologies: ["Android", "Spring Boot", "MySQL", "Firebase", "ThingSpeak", "PlatformIO", "Arduino", "Chatbot", "OpenWeatherMap API", "Google Maps API"],
       icon: <FaAndroid />,
       color: "#3DDC84",
       github: "#"
@@ -207,7 +207,7 @@ const Projects = () => {
         "Data history and graph visualization",
         "Integration with weather, Google Maps, and ChatGPT APIs"
       ],
-      technologies: ["Android", "Spring Boot", "MySQL", "Firebase", "ThingSpeak", "PlatformIO", "Arduino", "ISIS", "OpenWeatherMap API", "Google Maps API", "Chatbot"],
+      technologies: ["Android", "Spring Boot", "MySQL", "Firebase", "ThingSpeak", "PlatformIO", "Arduino",  "Chatbot", "OpenWeatherMap API", "Google Maps API"],
       icon: <FaAndroid />,
       color: "#3DDC84",
       github: "#"
@@ -291,9 +291,9 @@ const Projects = () => {
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
-         <span className="text-gradient">
-           {language === 'fr' ? 'Projets Personnels' : 'Personal Projects'}
-         </span> 
+          <span className="text-gradient">
+            {language === 'fr' ? 'Projets Personnels' : 'Personal Projects'}
+          </span> 
         </motion.h2>
 
         <div className="projects-grid">
@@ -305,41 +305,44 @@ const Projects = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              whileHover={{ y: -10 }}
+              whileHover={{ scale: 1.05 }}
             >
-              <div
-                className="project-icon"
-                style={{ backgroundColor: project.color }}
-                aria-label={`${project.title} icon`}
-              >
-                {project.icon}
-              </div>
-
-              <div className="project-content">
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
-
-                <ul className="features-list">
-                  {project.features.map((feature, i) => (
-                    <li key={i}>{feature}</li>
-                  ))}
-                </ul>
-
-                <div className="technologies">
-                  {project.technologies.map((tech, i) => (
-                    <span key={i}>{tech}</span>
-                  ))}
+              <div className="project-card-inner">
+                <div className="project-card-front">
+                  <div className="project-icon" style={{ backgroundColor: project.color }}>
+                    {project.icon}
+                  </div>
+                  <div className="project-content-front">
+                    <h3>{project.title}</h3>
+                    <p>{project.description}</p>
+                    <div className="technologies">
+                      {project.technologies.map((tech, i) => (
+                        <span key={i}>{tech}</span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
+                
+                <div className="project-card-back">
 
-                <a
-                  href={project.github}
-                  className="project-link"
-                  style={{ color: project.color }}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaGithub /> {language === 'fr' ? 'Voir sur GitHub' : 'View on GitHub'}
-                </a>
+                  <div className="project-content-back">
+                    <h3>{project.title}</h3>
+                    <ul className="features-list">
+                      {project.features.map((feature, i) => (
+                        <li key={i}><p>{feature}</p></li>
+                      ))}
+                    </ul>
+                    <a
+                      href={project.github}
+                      className="project-link"
+                      style={{ backgroundColor: project.color }}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <FaGithub /> {language === 'fr' ? 'Voir sur GitHub' : 'View on GitHub'}
+                    </a>
+                  </div>
+                </div>
               </div>
             </motion.div>
           ))}

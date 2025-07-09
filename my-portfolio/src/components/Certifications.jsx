@@ -58,13 +58,12 @@ const Certifications = () => {
     <section id="certifications" className={`certifications-section ${theme}`}>
       <div className="container">
         <motion.h2
+          className="tous-title"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="section-title"
         >
-          <FaCertificate className="title-icon" />
           <span className="text-gradient">{t.title}</span>
         </motion.h2>
 

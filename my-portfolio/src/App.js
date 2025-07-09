@@ -11,6 +11,7 @@ import Languages from './components/Languages';
 import Quality from './components/Quality';
 import ContactForm from './components/ContactForm';
 import Certifications from './components/Certifications';
+import CommunityLife from './components/CommunityLife';
 import Footer from './components/Footer';
 import './assets/styles/global.css';
 import { ThemeProvider } from './context/ThemeContext';
@@ -51,6 +52,7 @@ function App() {
                 <Projects />
                 <Skills />
                 <Languages />
+                <CommunityLife/>
                 {/*<Certifications />*/}
                 <Quality />
                 <ContactForm />
